@@ -1,12 +1,19 @@
 #!/usr/bin/env node
-
-import { input } from "@inquirer/prompts";
-import { beautifyName } from "./utils/beautifyName.js";
-import { inputQuestions } from "./questions/input.js";
-
-const name = await input(inputQuestions[0]);
-
-console.log(`Hello, ${beautifyName(name)}!`);
-
-process.exit();
-
+import chalk from "chalk";
+import { objStudent } from "./Student.js";
+async function main() {
+  const name1 = await objStudent.getStudentName();
+  console.log(chalk.cyanBright`----------------------------------------`);
+  console.log(
+    chalk.blueBright` Are You curious to know about your Personality!\n`
+  );
+  await objStudent.askQuestion();
+  console.log(
+    "Your name is:",
+    chalk.greenBright(name1),
+    " and Personality is:",
+    chalk.greenBright(objStudent.getPersonality())
+  );
+  console.log(chalk.cyanBright`----------------------------------------`);
+}
+main();
